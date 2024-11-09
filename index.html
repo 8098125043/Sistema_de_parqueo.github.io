@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Alquiler de Vehículos</title>
+    <!-- Vinculamos Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Vinculamos nuestro archivo CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Alquiler de Vehículos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registrarse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vehiculos.html">Vehículos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contac.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="container mt-5">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h2>Bienvenido al Sistema de Alquiler de Vehículos</h2>
+                <p>Encuentra, reserva y alquila vehículos fácilmente desde cualquier lugar.</p>
+                <p>Explora nuestros vehículos y comienza tu experiencia hoy mismo.</p>
+                <a href="vehiculos.html" class="btn btn-primary">Ver Vehículos Disponibles</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="container mt-5">
+        <h3>Vehículos Disponibles</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/car1.jpg" class="card-img-top" alt="Vehículo 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Vehículo 1</h5>
+                        <p class="card-text">Modelo: XYZ, Capacidad: 5 personas</p>
+                        <a href="reserva.html" class="btn btn-success">Reservar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/car2.jpg" class="card-img-top" alt="Vehículo 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Vehículo 2</h5>
+                        <p class="card-text">Modelo: ABC, Capacidad: 4 personas</p>
+                        <a href="reserva.html" class="btn btn-success">Reservar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images/car3.jpg" class="card-img-top" alt="Vehículo 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Vehículo 3</h5>
+                        <p class="card-text">Modelo: DEF, Capacidad: 7 personas</p>
+                        <a href="reserva.html" class="btn btn-success">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Sistema de Alquiler de Vehículos. Todos los derechos reservados.</p>
+        <p>PARKINSLOT.</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

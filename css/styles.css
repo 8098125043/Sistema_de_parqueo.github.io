@@ -1,0 +1,121 @@
+/* Fondo y colores principales */
+body {
+    background-color: #eaf2f8; /* Fondo azul claro */
+    color: #333; /* Texto oscuro para buena legibilidad */
+}
+
+.navbar {
+    background-color: #fbcdc8; /* Barra de navegación con color rosa suave */
+}
+
+.navbar a {
+    color: #fff; /* Enlaces en blanco */
+}
+
+.navbar a:hover {
+    color: #dcdcdc; /* Color más claro al pasar el mouse */
+}
+
+/* Encabezados */
+h2, h3 {
+    color: #fbcdc8; /* Color rosa suave para los encabezados */
+}
+
+/* Tarjetas */
+.card {
+    border: none; /* Eliminar borde de las tarjetas */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco para las tarjetas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.card-title, .card-text {
+    color: #333; /* Color de texto dentro de las tarjetas */
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #fbcdc8; /* Botón primario con color rosa suave */
+    border-color: #fbcdc8;
+}
+
+.btn-primary:hover {
+    background-color: #e6b0a9; /* Color más oscuro al pasar el mouse */
+    border-color: #e6b0a9;
+}
+
+.btn-success {
+    background-color: #e9f7ef; /* Botón verde claro */
+    border-color: #e9f7ef;
+}
+
+.btn-success:hover {
+    background-color: #b6e3c0; /* Botón verde más oscuro al pasar el mouse */
+    border-color: #b6e3c0;
+}
+
+.btn-warning {
+    background-color: #ffc107; /* Botón amarillo */
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; /* Botón amarillo al pasar el mouse */
+    border-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Botón rojo */
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Botón rojo al pasar el mouse */
+    border-color: #c82333;
+}
+
+.btn-light {
+    background-color: #f8f9fa; /* Botón claro */
+    border-color: #f8f9fa;
+}
+
+.btn-light:hover {
+    background-color: #e2e6ea; /* Botón claro al pasar el mouse */
+    border-color: #dae0e5;
+}
+
+/* Formularios */
+input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type="submit"], button[type="submit"] {
+    background-color: #fbcdc8; /* Botón de formulario color rosa suave */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover, button[type="submit"]:hover {
+    background-color: #e6b0a9; /* Hover sobre los botones de formulario */
+}
+
+/* Estilo para las tarjetas de los vehículos */
+.card img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 200px;
+}
+
+/* Adaptación en pantallas pequeñas */
+@media (max-width: 767px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
