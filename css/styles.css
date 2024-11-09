@@ -2,10 +2,11 @@
 body {
     background-color: #eaf2f8;
     /* Fondo azul claro */
-    color           : #333;
+    color           : #262626;
     /* Texto oscuro para buena legibilidad */
     margin          : 0;
     padding         : 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .imagenparqueo{
@@ -21,6 +22,8 @@ body {
 .navbar a {
     color: #fffefe;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 
 .navbar a:hover {
@@ -31,7 +34,7 @@ body {
 /* Encabezados */
 h2,
 h3 {
-    color        : #fbcdc8;
+    color        : #e29289;
     /* Color rosa suave para los encabezados */
     margin-bottom: 20px;
     /* Espaciado debajo de los encabezados */
@@ -39,7 +42,7 @@ h3 {
 
 /* Sección de bienvenida */
 header {
-    background-color: #fbcdc8;
+    background-color: #daa7a1;
     /* Color de fondo suave */
     color           : #fff;
     /* Texto blanco */
@@ -110,7 +113,7 @@ header p {
 }
 
 .btn-success {
-    background-color: #e9f7ef;
+    background-color: #8f9491;
     /* Botón verde claro */
     border-color    : #e9f7ef;
 }
@@ -170,7 +173,7 @@ section.bg-light p {
 
 /* Pie de página */
 footer {
-    background-color: #333;
+    background-color: #464545;
     color           : #fff;
     padding         : 20px 0;
     /* Espaciado en el pie de página */
