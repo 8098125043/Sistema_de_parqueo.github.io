@@ -2,8 +2,11 @@
 body {
     background-color: #eaf2f8; /* Fondo azul claro */
     color: #333; /* Texto oscuro para buena legibilidad */
+    margin: 0;
+    padding: 0;
 }
 
+/* Barra de navegación */
 .navbar {
     background-color: #fbcdc8; /* Barra de navegación con color rosa suave */
 }
@@ -19,6 +22,23 @@ body {
 /* Encabezados */
 h2, h3 {
     color: #fbcdc8; /* Color rosa suave para los encabezados */
+    margin-bottom: 20px; /* Espaciado debajo de los encabezados */
+}
+
+/* Sección de bienvenida */
+header {
+    background-color: #fbcdc8; /* Color de fondo suave */
+    color: #fff; /* Texto blanco */
+    padding: 50px 0; /* Espaciado en el header */
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1.25rem;
 }
 
 /* Tarjetas */
@@ -27,16 +47,37 @@ h2, h3 {
     border-radius: 10px; /* Bordes redondeados */
     background-color: #ffffff; /* Fondo blanco para las tarjetas */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px; /* Separación entre tarjetas */
+    transition: all 0.3s ease-in-out;
 }
 
-.card-title, .card-text {
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más fuerte al pasar el mouse */
+}
+
+.card-title {
     color: #333; /* Color de texto dentro de las tarjetas */
+    font-size: 1.25rem;
+}
+
+.card-text {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Tarjetas de vehículos */
+.card img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 200px;
 }
 
 /* Botones */
 .btn-primary {
     background-color: #fbcdc8; /* Botón primario con color rosa suave */
     border-color: #fbcdc8;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .btn-primary:hover {
@@ -54,46 +95,17 @@ h2, h3 {
     border-color: #b6e3c0;
 }
 
-.btn-warning {
-    background-color: #ffc107; /* Botón amarillo */
-    border-color: #ffc107;
-}
-
-.btn-warning:hover {
-    background-color: #e0a800; /* Botón amarillo al pasar el mouse */
-    border-color: #e0a800;
-}
-
-.btn-danger {
-    background-color: #dc3545; /* Botón rojo */
-    border-color: #dc3545;
-}
-
-.btn-danger:hover {
-    background-color: #c82333; /* Botón rojo al pasar el mouse */
-    border-color: #c82333;
-}
-
-.btn-light {
-    background-color: #f8f9fa; /* Botón claro */
-    border-color: #f8f9fa;
-}
-
-.btn-light:hover {
-    background-color: #e2e6ea; /* Botón claro al pasar el mouse */
-    border-color: #dae0e5;
-}
-
-/* Formularios */
+/* Estilo para formularios */
 input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
     border-radius: 5px;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 12px;
+    margin-bottom: 15px; /* Espaciado entre campos de formulario */
     width: 100%;
 }
 
 input[type="submit"], button[type="submit"] {
-    background-color: #fbcdc8; /* Botón de formulario color rosa suave */
+    background-color: #fbcdc8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -105,17 +117,42 @@ input[type="submit"]:hover, button[type="submit"]:hover {
     background-color: #e6b0a9; /* Hover sobre los botones de formulario */
 }
 
-/* Estilo para las tarjetas de los vehículos */
-.card img {
-    border-radius: 10px;
-    object-fit: cover;
-    height: 200px;
+/* Sección de contacto */
+section.bg-light {
+    background-color: #eaf2f8;
+    padding: 50px 0; /* Espaciado en la sección */
 }
 
-/* Adaptación en pantallas pequeñas */
+section.bg-light h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px; /* Espaciado debajo del encabezado */
+}
+
+section.bg-light p {
+    font-size: 1.25rem;
+}
+
+/* Pie de página */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0; /* Espaciado en el pie de página */
+}
+
+footer p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Ajustes de márgenes y espaciado en pantallas pequeñas */
 @media (max-width: 767px) {
     .container {
         padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .card {
+        margin-bottom: 15px; /* Reducir el margen inferior en pantallas pequeñas */
     }
 }
