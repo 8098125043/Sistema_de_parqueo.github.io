@@ -1,52 +1,100 @@
 /* Fondo y colores principales */
 body {
-    background-color: #f4f6f9;
-    color: #333;
-    font-family: Arial, sans-serif;
+    background-color: #f5f0f5;
+    color: #333333;
+    font-family: 'Georgia', serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.parkinL {
+    height: 50px;
+    width: auto;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #84a9ac; /* color azul suave */
+    background-color: #efa79f;
 }
 
-.navbar a {
+.navbar .navbar-brand {
+    font-size: 1.5rem;
     color: #ffffff;
+    text-transform: uppercase;
 }
 
-.navbar a:hover {
-    color: #d3e0e9;
+.navbar .navbar-brand img {
+    height: 40px;
 }
 
-/* Dashboard Encabezados */
-h2 {
-    color: #52796f;
+.navbar .navbar-brand span {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: bold;
 }
 
-.card {
-    background-color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+/* Sección de Bienvenida */
+header {
+    background-color: #f1f1f1;
+    padding: 40px 0;
 }
 
-.card:hover {
-    transform: scale(1.02);
+header h1 {
+    color: #e29289;
+    font-size: 2.5rem;
 }
 
-.card-title {
-    color: #3a506b;
+header p {
+    color: #555555;
     font-size: 1.25rem;
 }
 
-.card-text {
-    color: #6c757d;
+/* Botón principal */
+.btn-primary {
+    background-color: #fbcdc8;
+    border-color: #fbcdc8;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #e6b0a9;
+    border-color: #e6b0a9;
+}
+
+/* Información del sistema */
+main h2 {
+    color: #e29289;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+main p {
+    color: #555555;
     font-size: 1.1rem;
 }
 
-/* Pie de página */
-footer {
-    background-color: #3a506b;
+/* Footer */
+.footer {
+    background-color: #464545;
     color: #ffffff;
+    padding: 15px 0;
+    
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer img {
+    height: 20px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 5px;
 }
