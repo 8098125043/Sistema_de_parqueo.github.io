@@ -1,28 +1,36 @@
-/* Fondo y colores principales */
-body {
-    background-color: #f5f0f5;
-    color: #333333;
-    font-family: 'Georgia', serif;
+/* Estilo global */
+* {
+    border: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    box-sizing: border-box;
 }
 
+body {
+    background-color: #f5f0f5; /* Color suave de fondo */
+    color: #333333; /* Color de texto principal */
+    font-family: 'Georgia', serif; /* Fuente elegante */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el footer esté en el fondo */
+}
+
+/* Logo */
 .parkinL {
-    height: 50px;
-    width: auto;
+    width: 70px;
+    height: 70px;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #efa79f;
+    background-color: #efa79f; /* Color suave pero elegante */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agregar sombra sutil */
 }
 
 .navbar .navbar-brand {
     font-size: 1.5rem;
     color: #ffffff;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .navbar .navbar-brand img {
@@ -38,63 +46,107 @@ body {
 /* Sección de Bienvenida */
 header {
     background-color: #f1f1f1;
-    padding: 40px 0;
+    padding: 50px 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave en la cabecera */
 }
 
 header h1 {
-    color: #e29289;
-    font-size: 2.5rem;
+    color: #e29289; /* Color elegante para el encabezado */
+    font-size: 3rem; /* Fuente más grande */
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
 header p {
     color: #555555;
     font-size: 1.25rem;
+    line-height: 1.6; /* Espaciado para mayor legibilidad */
 }
 
 /* Botón principal */
 .btn-primary {
-    background-color: #fbcdc8;
+    background-color: #c19a95;
     border-color: #fbcdc8;
     padding: 12px 25px;
     font-size: 1.2rem;
-    border-radius: 5px;
+    border-radius: 50px; /* Bordes redondeados */
+    transition: all 0.3s ease-in-out; /* Transición suave */
 }
 
 .btn-primary:hover {
     background-color: #e6b0a9;
     border-color: #e6b0a9;
+    transform: translateY(-2px); /* Efecto de elevación suave */
 }
 
-/* Información del sistema */
+/* Sección principal */
 main h2 {
-    color: #e29289;
+    color: #e29289; /* Color del subtítulo */
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-align: center; /* Centrado */
 }
 
 main p {
     color: #555555;
     font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.6;
 }
 
 /* Footer */
 .footer {
     background-color: #464545;
     color: #ffffff;
-    padding: 15px 0;
-    
+    padding: 25px 0;
+    position: relative;
     bottom: 0;
     width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil arriba del footer */
 }
 
 .footer p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    color: #ffffff;
 }
 
 .footer img {
     height: 20px;
     width: auto;
     vertical-align: middle;
-    margin-right: 5px;
+    margin-right: 8px; /* Espaciado entre la imagen y el texto */
+}
+
+/* Mejoras en responsividad */
+@media (max-width: 768px) {
+    body {
+        padding: 0 15px; /* Añadir un poco de relleno lateral en pantallas pequeñas */
+    }
+
+    .navbar .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    header h1 {
+        font-size: 2.2rem; /* Reducir el tamaño del encabezado en pantallas pequeñas */
+    }
+
+    main h2 {
+        font-size: 1.8rem; /* Ajustar el tamaño de los subtítulos */
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .footer {
+        font-size: 0.85rem;
+        padding: 15px 0;
+    }
 }

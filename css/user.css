@@ -1,0 +1,43 @@
+/* Estilos para la página de gestión de usuarios */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.table td button {
+    margin: 0 5px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #f8f9fa;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #5a5a5a;
+}
+
+.nav-link:hover {
+    color: #e29289;
+}
+
+/* Botón de Agregar Usuario */
+.btn-success {
+    background-color: #e29289;
+    border-color: #e29289;
+}
+
+.btn-success:hover {
+    background-color: #c26e61;
+    border-color: #c26e61;
+}

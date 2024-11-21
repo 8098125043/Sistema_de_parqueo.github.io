@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="./img/parkin.png" alt="Parkinslot" class="imagenparqueo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -20,42 +20,50 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-parking.html">Espacios de Parqueo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="entry-exit.html">Entrada y Salida</a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html">Registro de Empleados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="entrada-vehiculo.html">Entrada </a></li>
+                    <li class="nav-item"><a class="nav-link" href="salida_vehiculo.html"> Salida</a></li>
+                    <li class="nav-item"><a class="nav-link" href="registro.html">Registro de Empleados</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.html">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Panel Principal -->
+   
     <main class="container mt-5">
         <h2 class="text-center mb-4">Panel de Administración del Sistema de Parqueo</h2>
+
         <div class="row">
-            <div class="col-md-4">
-                <div class="card text-center">
+            <!-- Card 1: Espacios de Parqueo -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h5 class="card-title">Gestionar Espacios de Parqueo</h5>
                         <p class="card-text">Visualiza y administra los espacios de parqueo disponibles.</p>
-                        <a href="manage-parking.html" class="btn btn-primary">Ir a Espacios</a>
+                        <a href="manage-parking.html" class="btn btn-primary w-100">Ir a Espacios</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card text-center">
+
+          
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h5 class="card-title">Registrar Entradas y Salidas</h5>
                         <p class="card-text">Controla el flujo de vehículos dentro y fuera del parqueo.</p>
-                        <a href="entry-exit.html" class="btn btn-primary">Ir a Entradas/Salidas</a>
+                        <a href="entrada-vehiculo.html" class="btn btn-primary w-100 mb-2">Ir a Entradas</a>
+                        <a href="salida_vehiculo.html" class="btn btn-danger w-100">Ir a Salidas</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card text-center">
+
+            <!-- Card 3: Registro de Empleados -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h5 class="card-title">Registrar Empleados</h5>
                         <p class="card-text">Agrega y gestiona los empleados del sistema.</p>
-                        <a href="register.html" class="btn btn-primary">Ir a Registro de Empleados</a>
+                        <a href="registro.html" class="btn btn-success w-100">Ir a Registro de Empleados</a>
                     </div>
                 </div>
             </div>
@@ -63,11 +71,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
+    <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>&copy; 2024 Sistema de Parqueo PARKINSLOT. Todos los derechos reservados.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

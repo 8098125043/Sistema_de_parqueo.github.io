@@ -1,0 +1,39 @@
+
+/* Navbar */
+.navbar {
+    background-color: #f8f9fa;
+}
+
+.navbar-nav .nav-link {
+    color: #5a5a5a;
+    font-size: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #e29289;
+}
+
+/* Estilos para las tarjetas */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

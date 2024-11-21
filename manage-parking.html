@@ -3,76 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Espacios de Parqueo - Sistema de Parqueo</title>
+    <title>Gestión de Espacios - Sistema de Parqueo</title>
     <!-- Vinculación de Bootstrap y CSS personalizado -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/manage-parking.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="./img/parkin.png" alt="Parkinslot" class="imagenparqueo"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="manage-parking.html">Espacios de Parqueo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="entry-exit.html">Entrada y Salida</a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html">Registro de Empleados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Cerrar Sesión</a></li>
-                </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg" style="background-color: #efa79f;">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./img/parkin.png" alt="Parkinslot" class="imagenparqueo">
+                    <span class="ms-2 text-white">PARKINSLOT</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="manage-parking.html">Espacios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="entrada-vehiculo.html">Registrar Entrada</a></li>
+                        <li class="nav-item"><a class="nav-link" href="salida_vehiculo.html">Registrar Salida</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.html">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Sección principal para gestionar espacios de parqueo -->
     <main class="container mt-5">
-        <h2 class="text-center mb-4">Gestión de Espacios de Parqueo</h2>
-        
-        <!-- Tabla para visualizar los espacios de parqueo -->
+        <h2 class="text-center text-primary mb-4">Gestión de Espacios de Parqueo</h2>
+
+        <!-- Botón para Agregar un Nuevo Espacio -->
+        <div class="text-end mb-3">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarEspacio">Agregar Espacio</button>
+        </div>
+
         <div class="table-responsive">
-            <table class="table table-bordered text-center">
-                <thead class="table-light">
+            <table class="table table-striped table-hover text-center">
+                <thead class="table-primary">
                     <tr>
                         <th>Espacio</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Espacios de parqueo de ejemplo (para generar dinámicamente en backend) -->
                     <tr>
                         <td>1</td>
                         <td><span class="badge bg-success">Disponible</span></td>
-                        <td><button class="btn btn-primary btn-sm">Registrar Entrada</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="asignarEntrada(1)">Registrar Entrada</button>
+                            <button class="btn btn-sm btn-warning" onclick="editarEspacio(1)">Editar</button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarEspacio(1)">Eliminar</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td><span class="badge bg-danger">Ocupado</span></td>
-                        <td><button class="btn btn-secondary btn-sm" disabled>Registrar Salida</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary" disabled>Registrar Salida</button>
+                            <button class="btn btn-sm btn-warning" onclick="editarEspacio(2)">Editar</button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarEspacio(2)">Eliminar</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td><span class="badge bg-success">Disponible</span></td>
-                        <td><button class="btn btn-primary btn-sm">Registrar Entrada</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="asignarEntrada(3)">Registrar Entrada</button>
+                            <button class="btn btn-sm btn-warning" onclick="editarEspacio(3)">Editar</button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarEspacio(3)">Eliminar</button>
+                        </td>
                     </tr>
-                    <!-- Más espacios de parqueo según la capacidad configurada -->
                 </tbody>
             </table>
         </div>
     </main>
 
-    <!-- Footer fijo al fondo de la página -->
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <!-- Modal para Agregar Espacio -->
+    <div class="modal fade" id="modalAgregarEspacio" tabindex="-1" aria-labelledby="modalAgregarEspacioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarEspacioLabel">Agregar Nuevo Espacio de Parqueo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-agregar-espacio">
+                        <div class="mb-3">
+                            <label for="numero" class="form-label">Número de Espacio</label>
+                            <input type="number" class="form-control" id="numero" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-control" id="estado" required>
+                                <option value="Disponible">Disponible</option>
+                                <option value="Ocupado">Ocupado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" form="form-agregar-espacio">Guardar Espacio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 Sistema de Parqueo PARKINSLOT. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Vinculación de JavaScript de Bootstrap y script personalizado -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/manage-parking.js"></script>  <!-- Enlace a tu archivo JS -->
 </body>
 </html>

@@ -1,159 +1,146 @@
-/* General */
-* {
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    margin: 0;
-    padding: 0;
-}
-
+/* Estilo general de la página */
 body {
-    background-color: #f7eaea; 
-    color: #333333;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh; /* Asegura que el contenido tenga al menos la altura de la pantalla */
+    padding-bottom: 70px; /* Deja espacio para el footer */
 }
 
-main {
-    flex: 1;
+/* Navbar personalizado */
+nav.navbar {
+    background-color: #e87c7a; /* Color suave pero moderno */
 }
 
-.imagenparqueo {
+.navbar-brand img {
     height: 40px;
-    width: 40px;
 }
 
-/* Navbar */
-.navbar {
-    background-color: #efa79f;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem 2rem;
-}
-
-.navbar a {
-    color: #ffffff;
+.navbar-nav .nav-link {
     font-size: 1.1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-right: 1rem;
+    color: #ffffff !important;
 }
 
-.navbar a:hover {
-    color: #e06d6d;
-    transition: color 0.3s ease;
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important;
 }
 
 /* Título principal */
-h2 {
-    color: #e29289;
-    font-size: 2rem;
+h2.text-center {
+    font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    color: #e87c7a;
+    margin-bottom: 20px;
 }
 
-/* Tarjetas de resumen */
-.card {
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 1rem;
+/* Estilo de la tabla */
+.table {
     background-color: #ffffff;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.card-title {
-    color: #464545;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.card-text {
-    color: #333333;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-button, .btn-primary {
-    background-color: #e6b0a9;
-    color: #ffffff;
-    padding: 10px 20px;
     border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button:hover, .btn-primary:hover {
-    background-color: #fbcdc8;
-    transform: translateY(-2px);
-}
-
-input[type="text"], input[type="email"], input[type="password"], select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fdf4f4;
-    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-input[type="submit"] {
-    background-color: #e6b0a9;
+.table th {
+    background-color: #e87c7a;
     color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-input[type="submit"]:hover {
-    background-color: #fbcdc8;
-}
-
-footer {
-    background-color: #3a506b;
-    color: #ffffff;
-    padding: 1rem 0;
-    font-size: 0.9rem;
     text-align: center;
-    position: sticky;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 1.1rem;
+}
+
+.table .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+}
+
+.table .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+}
+
+/* Estilo de los botones */
+.btn-primary, .btn-warning, .btn-danger {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+}
+
+.btn-warning:hover {
+    background-color: #ffc107;
+}
+
+.btn-danger:hover {
+    background-color: #dc3545;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #e87c7a;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-footer .btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+/* Espaciado entre filas */
+.table-responsive {
+    margin-top: 30px;
+}
+
+/* Fondo de pie de página */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    position: absolute;
     bottom: 0;
     width: 100%;
+    padding: 20px 0;
+    font-size: 1rem;
+    text-align: center;
 }
 
-/* Estilo para textos en el footer */
 footer p {
-    margin: 5px 0;
+    margin-bottom: 0;
 }
 
-/* Responsivo para móviles */
-@media (max-width: 767px) {
-    .navbar {
-        padding: 0.75rem 1rem;
+/* Mejoras en la responsividad */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+        padding: 8px 12px;
     }
 
-    h2 {
-        font-size: 1.75rem;
+    h2.text-center {
+        font-size: 2rem;
+        margin-bottom: 15px;
     }
 
-    .card {
-        padding: 1rem;
+    .table td, .table th {
+        font-size: 1rem;
+        padding: 12px;
     }
 
     footer {
-        padding: 0.75rem 15px;
+        font-size: 0.9rem;
     }
 }
+

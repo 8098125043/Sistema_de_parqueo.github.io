@@ -1,0 +1,140 @@
+/* Restablecer márgenes y bordes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f0f5;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh; /* Garantiza que el body tenga al menos el 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Imagen del logo */
+#imagenparqueo {
+    width: 50%;
+    max-width: 200px;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Títulos */
+h2 {
+    color: #e29289;
+    font-style: italic;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos generales para formularios */
+.form-control {
+    border: 2px solid #e29289;
+    border-radius: 12px;
+    font-size: 1rem;
+    padding: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #fbcdc8;
+    box-shadow: 0 0 5px #fbcdc8;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #c4938e;
+    border: 1px solid #e29289;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px 30px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e29289;
+    border-color: #e29289;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #efa79f;
+    padding: 10px 30px;
+    border-bottom: 3px solid #e29289;
+}
+
+.navbar .navbar-brand img {
+    height: 40px;
+    margin-right: 15px;
+}
+
+.navbar .nav-link {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: #ad675f;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    font-size: 0.9rem;
+    border-top: 3px solid #e29289;
+    margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo si el contenido no ocupa toda la altura */
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Mejoras para botones de formularios y modales */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #e29289;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .navbar .nav-link {
+        font-size: 1rem;
+    }
+
+    .form-control {
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 8px 20px;
+    }
+}

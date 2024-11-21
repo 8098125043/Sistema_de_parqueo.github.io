@@ -1,0 +1,191 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+/* Estilo para Títulos */
+h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #e29289;
+    margin-bottom: 30px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #efa79f;
+    padding: 1rem 2rem;
+}
+
+.navbar .navbar-brand img {
+    height: 40px;
+}
+
+.navbar .nav-link {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: #fbcdc8;
+}
+
+.navbar .navbar-toggler {
+    border: none;
+}
+
+.navbar .navbar-toggler-icon {
+    background-color: #fff;
+}
+
+/* Tabla */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    font-size: 1rem;
+}
+
+.table th {
+    background-color: #efa79f;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+.table td {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.table .badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.table .badge.bg-success {
+    background-color: #28a745;
+}
+
+.table .badge.bg-danger {
+    background-color: #dc3545;
+}
+
+/* Botones */
+.btn {
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #fbcdc8;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #e29289;
+}
+
+.btn-secondary {
+    background-color: #bbb;
+    border: none;
+}
+
+.btn-secondary:disabled {
+    background-color: #ddd;
+    color: #999;
+}
+
+/* Estilos de Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+/* Espaciado de la tabla */
+.table-responsive {
+    margin-top: 20px;
+}
+
+/* Formularios */
+.form-control {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    padding: 12px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #e29289;
+    box-shadow: 0px 0px 5px rgba(226, 146, 137, 0.5);
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #e29289;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.modal-footer .btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+}
