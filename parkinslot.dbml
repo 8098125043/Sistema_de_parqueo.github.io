@@ -1,0 +1,53 @@
+Project Parkinslot {
+  database_type: 'PostgreSQL'
+  Note: 'Sistema gestor de parqueos'
+}
+
+Table usuarios {
+  id_usuario integer [primary key]
+  nombre varchar
+  email varchar
+  password varchar
+  rol varchar [note: "values [admin,cliente]"]
+  fecha_registro date
+}
+
+Table vehiculos {
+  id_vehiculo integer [primary key]
+  matricula varchar
+  marca varchar
+  modelo varchar
+  color varchar
+  id_usuario integer
+}
+
+Ref: usuarios.id_usuario - vehiculos.id_vehiculo
+
+Table parqueo_espacios {
+  id_espacio integer [primary key]
+  ubicacion varchar
+  estado varchar [note: 'values [disponible,ocupado,reservado]']
+}
+
+Table reservas{
+  id_reserva integer [primary key]
+  id_usuario integer
+  id_espacio integer
+  fecha_reserva date
+  hora_entrada time
+  hora_salida time
+}
+
+Ref: reservas.id_usuario > usuarios.id_usuario
+Ref: reservas.id_espacio > parqueo_espacios.id_espacio
+
+
+Table transaccions{
+  id_transaccion integer [primary key]
+  id_reserva integer
+  monto float
+  fecha datetime
+  metodo_pago varchar [note: 'values [efectivo,tarjeta]']
+}
+
+Ref: transaccions.id_reserva - reservas.id_reserva
