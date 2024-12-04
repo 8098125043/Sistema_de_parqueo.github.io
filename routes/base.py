@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, redirect, url_for
-from routes.controllers import create_user
+from routes.controllers import create_user, login_user
 
 base = Blueprint("base", __name__)
 
@@ -14,8 +14,21 @@ def inicio():
     return render_template("inicio.html")
 
 
-@base.get("/login")
+@base.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        try:
+            user = login_user(request.form)
+            if user:
+                return redirect(url_for("base.inicio"))
+            else:
+                return render_template(
+                    "login.html", error="email o contraseña incorrectos"
+                )
+        except Exception as e:
+            return render_template(
+                "login.html", error="Error al iniciar sesión: " + str(e)
+            )
     return render_template("login.html")
 
 

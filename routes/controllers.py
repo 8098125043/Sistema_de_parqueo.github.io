@@ -64,3 +64,19 @@ def create_user(data=None):
         password=password,
         rol=rol,
     )
+
+
+def login_user(data=None):
+    if data:
+        email = data.get("email")
+        password = data.get("password")
+    else:
+        email = request.json.get("email")
+        password = request.json.get("password")
+
+    service = UsuarioService()
+    user = service.get_usuario_by_email(email)
+
+    if user and user.password == password:
+        return user
+    return None

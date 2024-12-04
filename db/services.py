@@ -46,6 +46,15 @@ class SupabaseService(BaseService):
         )
         return result.data[0] if result.data else None
 
+    def get_item_by_custom_field(self, field_name, field_value):
+        result = (
+            self.supabase.from_(self.table_name)
+            .select("*")
+            .eq(field_name, field_value)
+            .execute()
+        )
+        return result.data[0] if result.data else None
+
     def update_item(self, item_id, new_data):
         result = (
             self.supabase.from_(self.table_name)
@@ -85,6 +94,19 @@ class UsuarioService:
 
     def get_usuario_by_id(self, id_usuario):
         result = self.supabase_service.get_item_by_id(id_usuario, "id_usuario")
+        if result:
+            return Usuario(
+                id_usuario=result["id_usuario"],
+                nombre=result["nombre"],
+                email=result["email"],
+                password=result["password"],
+                rol=result["rol"],
+                fecha_registro=result["fecha_registro"],
+            )
+        return None
+
+    def get_usuario_by_email(self, email):
+        result = self.supabase_service.get_item_by_custom_field("email", email)
         if result:
             return Usuario(
                 id_usuario=result["id_usuario"],
