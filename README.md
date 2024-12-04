@@ -13,31 +13,31 @@ Este proyecto utiliza Flask como framework para crear una aplicación web. Para 
 1.  Clona el repositorio:
 
 ```
-git clone https://github.com/tu-usuario/tu-repositorio.git
+$ git clone https://github.com/tu-usuario/tu-repositorio.git
 ```
 
 2.  Cambia al directorio del proyecto:
 
 ```
-cd tu-repositorio
+$ cd tu-repositorio
 ```
 
 3.  Crea un entorno virtual utilizando venv:
 
 ```
-python -m venv venv
+$ python -m venv venv
 ```
 
 4.  Activa el entorno virtual:
 
 ```
-source venv/bin/activate
+$ source venv/bin/activate
 ```
 
 5.  Instala las dependencias del proyecto:
 
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 **Correr el proyecto**
@@ -45,19 +45,19 @@ pip install -r requirements.txt
 1.  Cambia al directorio del proyecto:
 
 ```
-cd tu-repositorio
+$ cd tu-repositorio
 ```
 
 2.  Activa el entorno virtual:
 
 ```
-source venv/bin/activate
+$ source venv/bin/activate
 ```
 
 3.  Corre el proyecto:
 
 ```
-flask run
+$ flask run
 ```
 
 **Acceso a la aplicación**
