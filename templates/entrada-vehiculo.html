@@ -37,7 +37,36 @@
         <h2 class="text-center">Registro de Entrada</h2>
         <div class="card mt-4">
             <div class="card-body">
-                <form class="row g-3">
+                {%if not espacio%}
+                <script>
+                    alert("Espacio no disponible");
+                </script>
+                {%endif%}
+
+                <form class="row g-3" action="/entrada-vehiculo" method="POST">
+                    {%if not espacio%}
+                    <div class="col-md-6">
+                        <label for="vehiclePlate" class="form-label">Número de Placa</label>
+                        <input type="text" class="form-control" id="vehiclePlate" placeholder="Ej: ABC-1234" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="driverName" class="form-label">Nombre del Conductor</label>
+                        <input type="text" class="form-control" id="driverName" placeholder="Nombre Completo" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="entryTime" class="form-label">Hora de Entrada</label>
+                        <input type="time" class="form-control" id="entryTime" value="{{ hora }}" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="parkingSpace" class="form-label">Espacio de Parqueo</label>
+                        <input type="number" class="form-control" id="parkingSpace" placeholder="Número de Espacio"
+                            disabled>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary" disabled>Registrar Entrada</button>
+                    </div>
+                    {%endif%}
+                    {%if espacio%}
                     <div class="col-md-6">
                         <label for="vehiclePlate" class="form-label">Número de Placa</label>
                         <input type="text" class="form-control" id="vehiclePlate" placeholder="Ej: ABC-1234" required>
@@ -48,16 +77,17 @@
                     </div>
                     <div class="col-md-6">
                         <label for="entryTime" class="form-label">Hora de Entrada</label>
-                        <input type="time" class="form-control" id="entryTime" required>
+                        <input type="time" class="form-control" id="entryTime" value="{{ hora }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="parkingSpace" class="form-label">Espacio de Parqueo</label>
-                        <input type="number" class="form-control" id="parkingSpace" placeholder="Número de Espacio"
-                            required>
+                        <input type="text" class="form-control" id="parkingSpace" placeholder="Número de Espacio"
+                            disabled value='{{ espacio.ubicacion }}'>
                     </div>
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary">Registrar Entrada</button>
                     </div>
+                    {%endif%}
                 </form>
             </div>
         </div>

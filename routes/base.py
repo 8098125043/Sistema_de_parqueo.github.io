@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from routes.controllers import create_user, login_user
 from db.services import ParqueoEspacioService, UsuarioService
+from datetime import datetime
 
 base = Blueprint("base", __name__)
 
@@ -70,9 +71,32 @@ def manage_parking():
     return render_template("manage-parking.html", espacios=None)
 
 
-@base.get("/entrada-vehiculo")
+@base.route("/entrada-vehiculo", methods=["GET", "POST"])
 def entrada_vehiculo():
-    return render_template("entrada-vehiculo.html")
+    sevice = ParqueoEspacioService()
+    parqueo_espacios = sevice.get_parqueo_espacios()
+    hora_actual = datetime.now()
+    hora_actual = hora_actual.strftime("%H:%M")
+
+    espacio_disponible = None
+    for espacio in parqueo_espacios:
+        if espacio.estado == "Disponible":
+            espacio_disponible = espacio
+            break
+
+    if request.method == "POST":
+        print(request.form.get("vehiclePlate"))
+        print(request.form.get("driverName"))
+        return render_template(
+            "entrada-vehiculo.html", espacio=espacio, hora=hora_actual
+        )
+
+    if espacio_disponible:
+        return render_template(
+            "entrada-vehiculo.html", espacio=espacio_disponible, hora=hora_actual
+        )
+
+    return render_template("entrada-vehiculo.html", espacio=None, hora=hora_actual)
 
 
 @base.get("/salida-vehiculo")

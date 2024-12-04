@@ -160,6 +160,16 @@ class ParqueoEspacioService(SupabaseService):
     def __init__(self):
         super().__init__("parqueo_espacios")
 
+    def get_parqueo_espacios_by_ubicacion(self, ubicacion):
+        result = self.get_item_by_custom_field("ubicacion", ubicacion)
+        if result:
+            return ParqueoEspacio(
+                id_espacio=result["id_espacio"],
+                ubicacion=result["ubicacion"],
+                estado=result["estado"],
+            )
+        return None
+
     def get_parqueo_espacio(self, id_espacio):
         result = self.get_item_by_id(id_espacio)
         if result:
@@ -221,6 +231,19 @@ class ParqueoEspacioService(SupabaseService):
 class VehiculoService(SupabaseService):
     def __init__(self):
         super().__init__("vehiculos")
+
+    def get_vehiculo_by_matricula(self, matricula):
+        result = self.get_item_by_custom_field("matricula", matricula)
+        if result:
+            return Vehiculo(
+                id_vehiculo=result["id_vehiculo"],
+                matricula=result["matricula"],
+                marca=result["marca"],
+                modelo=result["modelo"],
+                color=result["color"],
+                id_usuario=result["id_usuario"],
+            )
+        return None
 
     def get_vehiculo(self, id_vehiculo):
         result = self.get_item_by_id(id_vehiculo)
@@ -316,15 +339,32 @@ class ReservaService(SupabaseService):
             )
         return None
 
-    def create_reserva(self, reserva):
+    def create_reserva(
+        self,
+        id_reserva,
+        id_espacio=None,
+        fecha_reserva=None,
+        hora_entrada=None,
+        hora_salida=None,
+    ):
         data = {
-            "id_usuario": reserva.id_usuario,
-            "id_espacio": reserva.id_espacio,
-            "fecha_reserva": reserva.fecha_reserva,
-            "hora_entrada": reserva.hora_entrada,
-            "hora_salida": reserva.hora_salida,
+            "id_usuario": 27,
+            "id_espacio": id_espacio,
+            "fecha_reserva": fecha_reserva,
+            "hora_entrada": hora_entrada,
+            "hora_salida": hora_salida,
         }
-        return self.add_item(data)
+        result = self.add_item(data)
+        if result:
+            return Reserva(
+                id_reserva=id_reserva,
+                id_usuario=27,
+                id_espacio=id_espacio,
+                fecha_reserva=fecha_reserva,
+                hora_entrada=hora_entrada,
+                hora_salida=hora_salida,
+            )
+        return None
 
     def update_reserva(
         self,

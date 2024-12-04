@@ -1,5 +1,10 @@
 from flask import Blueprint, jsonify, request
-from db.services import UsuarioService
+from db.services import (
+    UsuarioService,
+    ParqueoEspacioService,
+    VehiculoService,
+    ReservaService,
+)
 
 controllers = Blueprint("controllers", __name__, url_prefix="/api/")
 
@@ -64,6 +69,36 @@ def create_user(data=None):
         password=password,
         rol=rol,
     )
+
+
+def entrada_vehiculo(data=None):
+    if data:
+        matricula = data.get("vehiclePlate")
+        nombre_conductor = data.get("driverName")
+        hora_entrada = data.get("entryTime")
+        ubicacion = data.get("parkingSpace")
+    else:
+        matricula = request.json.get("vehiclePlate")
+        nombre_conductor = request.json.get("driverName")
+        hora_entrada = request.json.get("entryTime")
+        ubicacion = request.json.get("parkingSpace")
+
+    espacio_service = ParqueoEspacioService()
+    espacio = espacio_service.get_espacio_by_ubicacion(ubicacion)
+
+    if espacio:
+        service = VehiculoService()
+        result = service.create_vehiculo(
+            matricula, None, None, None, espacio.id_espacio
+        )
+
+        if result:
+            reserva_service = ReservaService()
+            reserva_service.create_reserva(
+                result.id_vehiculo, None, espacio.id_espacio, hora_entrada, None
+            )
+            return result
+    return None
 
 
 def login_user(data=None):
