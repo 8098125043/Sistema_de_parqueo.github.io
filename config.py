@@ -3,4 +3,5 @@ import os
 
 load_dotenv()
 
-base_url = os.environ["BASE_URL"]
+supabase_url = os.environ["SUPABASE_URL"]
+supabase_key = os.environ["SUPABASE_KEY"]
