@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from routes.controllers import create_user, login_user
+from db.services import ParqueoEspacioService, UsuarioService
 
 base = Blueprint("base", __name__)
 
@@ -53,12 +54,20 @@ def registro():
 
 @base.get("/user")
 def user():
-    return render_template("user.html")
+    sevice = UsuarioService()
+    users = sevice.get_all_usuarios()
+    if users:
+        return render_template("user.html", usuarios=users)
+    return render_template("user.html", usuarios=None)
 
 
-@base.get("/manage-parking")
+@base.route("/manage-parking", methods=["GET"])
 def manage_parking():
-    return render_template("manage-parking.html")
+    service = ParqueoEspacioService()
+    parqueo_espacios = service.get_parqueo_espacios()
+    if parqueo_espacios:
+        return render_template("manage-parking.html", espacios=parqueo_espacios)
+    return render_template("manage-parking.html", espacios=None)
 
 
 @base.get("/entrada-vehiculo")
@@ -68,7 +77,7 @@ def entrada_vehiculo():
 
 @base.get("/salida-vehiculo")
 def salida_vehiculo():
-    return render_template("salida-vehiculo.html")
+    return render_template("salida_vehiculo.html")
 
 
 @base.get("/contacto")

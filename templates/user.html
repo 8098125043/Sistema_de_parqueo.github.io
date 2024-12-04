@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios - Sistema de Parqueo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="./img/parkin.png" alt="Parkinslot" class="imagenparqueo"></a>
+            <a class="navbar-brand" href="#"><img src="../static/img/parkin.png" alt="Parkinslot"
+                    class="imagenparqueo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="manage-parking.html">Espacios de Parqueo</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="users.html">Usuarios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Cerrar Sesión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/manage-parking">Espacios de Parqueo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    
+
     <div class="container mt-5">
         <h2 class="text-center mb-4">Gestión de Usuarios</h2>
 
-    
+
         <div class="table-responsive">
             <table class="table table-bordered text-center">
                 <thead class="table-light">
                     <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Tipo de Usuario</th>
@@ -45,51 +47,41 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if not usuarios %}
                     <tr>
-                        <td>1</td>
-                        <td>Juan Pérez</td>
-                        <td>juanperez@correo.com</td>
-                        <td>Administrador</td>
+                        <td colspan="4">No hay espacios</td>
+                    </tr>
+                    {% endif %}
+                    {% if usuarios %}
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <!-- <td>1</td> -->
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.rol }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                            <button class="btn btn-warning btn-sm" disabled>Editar</button>
+                            <button class="btn btn-danger btn-sm" disabled>Eliminar</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Ana González</td>
-                        <td>anagonzalez@correo.com</td>
-                        <td>Operador</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>José Martínez</td>
-                        <td>josemartinez@correo.com</td>
-                        <td>Supervisor</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
-                    
+                    {% endfor %}
+                    {% endif %}
+
                 </tbody>
             </table>
         </div>
-        
+
         <div class="text-center mt-4">
-            <a href="registro.html" class="btn btn-success">Agregar Nuevo Usuario</a>
+            <a href="/registro" class="btn btn-success">Agregar Nuevo Usuario</a>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <footer class="bg-dark text-white text-center py-3 mt-auto fixed-bottom">
         <p>&copy; 2024 Sistema de Parqueo PARKINSLOT. Todos los derechos reservados.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
