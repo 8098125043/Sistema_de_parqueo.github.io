@@ -1,152 +1,218 @@
 /* Estilo global */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+MX+Guides&display=swap');
+
 * {
     border: 0;
     margin: 0;
     box-sizing: border-box;
+
+
 }
 
 body {
-    background-color: #f5f0f5; /* Color suave de fondo */
-    color: #333333; /* Color de texto principal */
-    font-family: 'Georgia', serif; /* Fuente elegante */
+    background-image: linear-gradient(rgba(10, 9, 9, 0.727), rgb(11, 11, 11)), url('../img/image3.png');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    object-fit: cover;
+
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el footer esté en el fondo */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Logo */
-.parkinL {
-    width: 70px;
-    height: 70px;
-}
 
-/* Navbar */
-.navbar {
-    background-color: #efa79f; /* Color suave pero elegante */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agregar sombra sutil */
-}
 
-.navbar .navbar-brand {
-    font-size: 1.5rem;
-    color: #ffffff;
-    text-transform: uppercase;
+h1 {
+    color: whitesmoke;
+    /* Color elegante para el encabezado */
+    -webkit-text-stroke: 1px rgb(213, 190, 190);
     font-weight: bold;
-}
-
-.navbar .navbar-brand img {
-    height: 40px;
-}
-
-.navbar .navbar-brand span {
-    font-size: 1.5rem;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-/* Sección de Bienvenida */
-header {
-    background-color: #f1f1f1;
-    padding: 50px 0;
+    text-shadow: 7px 7px 12px rgba(139, 132, 123, 0.867);
+    font-size: 8em;
+    padding: 5px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave en la cabecera */
+    letter-spacing: 4px;
+    font-family: "Dancing Script", ;
 }
 
-header h1 {
-    color: #e29289; /* Color elegante para el encabezado */
-    font-size: 3rem; /* Fuente más grande */
-    font-weight: bold;
-    margin-bottom: 15px;
-}
 
-header p {
-    color: #555555;
-    font-size: 1.25rem;
-    line-height: 1.6; /* Espaciado para mayor legibilidad */
-}
 
-/* Botón principal */
-.btn-primary {
-    background-color: #c19a95;
-    border-color: #fbcdc8;
-    padding: 12px 25px;
-    font-size: 1.2rem;
-    border-radius: 50px; /* Bordes redondeados */
-    transition: all 0.3s ease-in-out; /* Transición suave */
-}
 
-.btn-primary:hover {
-    background-color: #e6b0a9;
-    border-color: #e6b0a9;
-    transform: translateY(-2px); /* Efecto de elevación suave */
-}
 
-/* Sección principal */
-main h2 {
-    color: #e29289; /* Color del subtítulo */
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: bold;
-    text-align: center; /* Centrado */
-}
 
-main p {
-    color: #555555;
-    font-size: 1.1rem;
-    text-align: center;
-    line-height: 1.6;
-}
-
-/* Footer */
-.footer {
-    background-color: #464545;
-    color: #ffffff;
-    padding: 25px 0;
-    position: relative;
-    bottom: 0;
+main {
+    height: 80vh;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    font-size: 0.9rem;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil arriba del footer */
+    color: rgb(213, 208, 208);
+    letter-spacing: 1.5px;
+    font-family: poppins;
+    gap: 8px;
+    text-shadow: px 2px 1px gray;
+    flex: 1;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.main h2 {
+    font-size: 2em;
+    text-transform: uppercase;
+    color: rgb(213, 208, 208);
+}
+
+.inicioseccion {
+    width: 200px;
+    background-color: rgba(75, 70, 75, 0.669);
+    padding: 10px;
+    border-radius: 10px 5px;
+    color: rgb(231, 224, 224);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    box-shadow: 3.5px 5px 2px rgb(62, 62, 62);
+    padding-bottom: 10px;
+    text-align: center;
+
+}
+
+main .inicioseccion:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    box-shadow: 3.5px 5px 2px rgba(128, 128, 128, 0.4);
+    color: white;
+}
+
+.formulario {
+
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    width: 600px;
+}
+
+.formulario input {
+    width: 350px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+.formulario label {
+    color: rgb(189, 177, 177);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.texto {
+    color: whitesmoke;
+    padding: 5px;
+    width: 50%;
+    font-size: 15px;
+}
+
+.texto>a {
+    text-decoration: none;
+    color: rgb(239, 231, 218);
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.texto>a:hover {
+    color: white;
+    text-decoration: double;
+
+}
+
+.R:hover {
+    text-decoration: underline;
+    font-size: 1.5em;
+}
+
+a img {
+    width: 250px;
+    height: 180px;
+}
+
+
+footer {
+    font-family: "Dancing Script";
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .footer p {
-    margin: 0;
-    font-size: 0.95rem;
+
     color: #ffffff;
 }
 
-.footer img {
-    height: 20px;
-    width: auto;
-    vertical-align: middle;
-    margin-right: 8px; /* Espaciado entre la imagen y el texto */
+.footer a {
+    text-decoration: none;
+    font-size: 15px;
+    color: inherit;
 }
 
-/* Mejoras en responsividad */
-@media (max-width: 768px) {
-    body {
-        padding: 0 15px; /* Añadir un poco de relleno lateral en pantallas pequeñas */
+.footer img {
+    height: 15px;
+    width: auto;
+}
+
+@media(max-width:700px) {
+
+
+    h1 {
+        color: transparent;
+        -webkit-text-stroke: 1px rgb(213, 190, 190);
+        font-weight: bold;
+        text-shadow: 3px 3px 6px rgba(113, 103, 89, 0.867);
+        font-size: 30px;
+
+        text-align: center;
+        letter-spacing: 1px;
+        font-family: cursive;
     }
 
-    .navbar .navbar-brand {
-        font-size: 1.2rem;
+
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        height: auto;
+        flex: 1;
     }
 
-    header h1 {
-        font-size: 2.2rem; /* Reducir el tamaño del encabezado en pantallas pequeñas */
-    }
+    footer {
+        min-height: 20vh;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
 
-    main h2 {
-        font-size: 1.8rem; /* Ajustar el tamaño de los subtítulos */
-    }
-
-    .btn-primary {
-        font-size: 1rem;
-        padding: 10px 20px;
-    }
-
-    .footer {
-        font-size: 0.85rem;
-        padding: 15px 0;
     }
 }
