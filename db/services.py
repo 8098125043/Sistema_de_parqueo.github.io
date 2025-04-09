@@ -1,7 +1,9 @@
-from config import supabase_key, supabase_url
-from supabase import create_client
+# from config import supabase_key, supabase_url
+# from supabase import create_client
 from db.models import Usuario, ParqueoEspacio, Vehiculo, Reserva
 from datetime import datetime
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 
 class BaseService:
@@ -21,54 +23,91 @@ class BaseService:
         pass
 
 
+# class SupabaseService(BaseService):
+#     def __init__(self, table_name):
+#         self.supabase_url = supabase_url
+#         self.supabase_key = supabase_key
+#         # self.supabase_secret = os.environ.get('SUPABASE_SECRET')
+#         self.supabase = create_client(self.supabase_url, self.supabase_key)
+#         self.table_name = table_name
+
+#     def add_item(self, item_data):
+#         result = self.supabase.from_(self.table_name).insert([item_data]).execute()
+#         return result.data
+
+#     def get_all_items(self):
+#         result = self.supabase.from_(self.table_name).select("*").execute()
+#         return result.data
+
+#     def get_item_by_id(self, item_id, id_field="id"):
+#         result = (
+#             self.supabase.from_(self.table_name)
+#             .select("*")
+#             .eq(id_field, item_id)
+#             .execute()
+#         )
+#         return result.data[0] if result.data else None
+
+#     def get_item_by_custom_field(self, field_name, field_value):
+#         result = (
+#             self.supabase.from_(self.table_name)
+#             .select("*")
+#             .eq(field_name, field_value)
+#             .execute()
+#         )
+#         return result.data[0] if result.data else None
+
+#     def update_item(self, item_id, new_data):
+#         result = (
+#             self.supabase.from_(self.table_name)
+#             .update({"id": item_id})
+#             .set(new_data)
+#             .execute()
+#         )
+#         return result.data[0]
+
+#     def delete_item(self, item_id):
+#         result = self.supabase.from_(self.table_name).delete({"id": item_id}).execute()
+#         if result.error:
+#             print(result.error)
+#         return result
+
+
 class SupabaseService(BaseService):
-    def __init__(self, table_name):
-        self.supabase_url = supabase_url
-        self.supabase_key = supabase_key
-        # self.supabase_secret = os.environ.get('SUPABASE_SECRET')
-        self.supabase = create_client(self.supabase_url, self.supabase_key)
+    def __init__(self, table_name, supabase_key, supabase_url):
+        super().__init__()
+        self.engine = create_engine(
+            f"postgresql://postgres:{supabase_key}@{supabase_url}/postgres"
+        )
+        self.Base = declarative_base()
+        self.Session = sessionmaker(bind=self.engine)
+        self.session = self.Session()
         self.table_name = table_name
 
     def add_item(self, item_data):
-        result = self.supabase.from_(self.table_name).insert([item_data]).execute()
-        return result.data
+        item = self.table_name(**item_data)
+        self.session.add(item)
+        self.session.commit()
+        return item
 
     def get_all_items(self):
-        result = self.supabase.from_(self.table_name).select("*").execute()
-        return result.data
+        table = self.Base.metadata.tables[self.table_name]
+        return self.session.query(table).all()
 
     def get_item_by_id(self, item_id, id_field="id"):
-        result = (
-            self.supabase.from_(self.table_name)
-            .select("*")
-            .eq(id_field, item_id)
-            .execute()
-        )
-        return result.data[0] if result.data else None
-
-    def get_item_by_custom_field(self, field_name, field_value):
-        result = (
-            self.supabase.from_(self.table_name)
-            .select("*")
-            .eq(field_name, field_value)
-            .execute()
-        )
-        return result.data[0] if result.data else None
+        table = self.Base.metadata.tables[self.table_name]
+        return self.session.query(table).filter(table.c.id == item_id).first()
 
     def update_item(self, item_id, new_data):
-        result = (
-            self.supabase.from_(self.table_name)
-            .update({"id": item_id})
-            .set(new_data)
-            .execute()
-        )
-        return result.data[0]
+        table = self.Base.metadata.tables[self.table_name]
+        self.session.query(table).filter(table.c.id == item_id).update(new_data)
+        self.session.commit()
+        return self.get_item_by_id(item_id)
 
     def delete_item(self, item_id):
-        result = self.supabase.from_(self.table_name).delete({"id": item_id}).execute()
-        if result.error:
-            print(result.error)
-        return result
+        table = self.Base.metadata.tables[self.table_name]
+        self.session.query(table).filter(table.c.id == item_id).delete()
+        self.session.commit()
 
 
 class UsuarioService:
