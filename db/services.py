@@ -1,5 +1,6 @@
 from .base_service import BaseService
 from .supabase_service import SupabaseService
+from .sqlite_service import SqliteService
 from config import app_env
 from db.models import Usuario, ParqueoEspacio, Vehiculo, Reserva
 from datetime import datetime
@@ -10,6 +11,8 @@ class UsuarioService:
     def create_instance(cls):
         if app_env == "production":
             return cls(SupabaseService("usuarios"))
+        elif app_env == "local":
+            return cls(SqliteService("usuarios"))
         else:
             raise ValueError('APP_ENV no valido')
 
@@ -101,6 +104,8 @@ class ParqueoEspacioService():
     def create_instance(cls):
         if app_env == "production":
             return cls(SupabaseService("parqueo_espacios"))
+        elif app_env == "local":
+            return cls(SqliteService("parqueo_espacios"))
         else:
             raise ValueError('APP_ENV no valido')
     
@@ -181,6 +186,8 @@ class VehiculoService():
     def create_instance(cls):
         if app_env == "production":
             return cls(SupabaseService("vehiculos"))
+        elif app_env == "local":
+            return cls(SqliteService("vehiculos"))
         else:
             raise ValueError('APP_ENV no valido')
     def __init__(self, database_service: BaseService):
@@ -282,6 +289,8 @@ class ReservaService():
     def create_instance(cls):
         if app_env == "production":
             return cls(SupabaseService("reservas"))
+        elif app_env == "local":
+            return cls(SqliteService("reservas"))
         else:
             raise ValueError('APP_ENV no valido')
 
