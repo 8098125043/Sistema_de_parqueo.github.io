@@ -12,7 +12,7 @@ controllers = Blueprint("controllers", __name__, url_prefix="/api/")
 @controllers.route("/users_test", methods=["GET"])
 def get_users_test():
     try:
-        service = UsuarioService()
+        service = UsuarioService.create_instance()
         # print(service.get_all_usuarios()[0].to_dict())
         user = service.get_usuario_by_id(6)
         print(user)
@@ -26,14 +26,14 @@ def get_users_test():
 
 @controllers.route("/users", methods=["GET"])
 def get_users():
-    service = UsuarioService()
+    service = UsuarioService.create_instance()
     users = service.get_all_usuarios()
     return jsonify(users)
 
 
 @controllers.route("/users/<int:id>", methods=["GET"])
 def get_user(id):
-    service = UsuarioService()
+    service = UsuarioService.create_instance()
     user = service.get_usuario_by_id(id)
     return jsonify(user)
 
@@ -62,7 +62,7 @@ def create_user(data=None):
         password = request.json.get("password")
         rol = request.json.get("tipoEmpleado")
 
-    service = UsuarioService()
+    service = UsuarioService.create_instance()
     return service.create_usuario(
         nombre=nombre,
         email=email,
@@ -109,7 +109,7 @@ def login_user(data=None):
         email = request.json.get("email")
         password = request.json.get("password")
 
-    service = UsuarioService()
+    service = UsuarioService.create_instance()
     user = service.get_usuario_by_email(email)
 
     if user and user.password == password:

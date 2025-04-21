@@ -1,123 +1,23 @@
-# from config import supabase_key, supabase_url
-# from supabase import create_client
+from .base_service import BaseService
+from .supabase_service import SupabaseService
+from config import app_env
 from db.models import Usuario, ParqueoEspacio, Vehiculo, Reserva
 from datetime import datetime
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
-
-
-class BaseService:
-    def add_item(self, item_data):
-        pass
-
-    def get_all_items(self):
-        pass
-
-    def get_item_by_id(self, item_id):
-        pass
-
-    def update_item(self, item_id, new_data):
-        pass
-
-    def delete_item(self, item_id):
-        pass
-
-
-# class SupabaseService(BaseService):
-#     def __init__(self, table_name):
-#         self.supabase_url = supabase_url
-#         self.supabase_key = supabase_key
-#         # self.supabase_secret = os.environ.get('SUPABASE_SECRET')
-#         self.supabase = create_client(self.supabase_url, self.supabase_key)
-#         self.table_name = table_name
-
-#     def add_item(self, item_data):
-#         result = self.supabase.from_(self.table_name).insert([item_data]).execute()
-#         return result.data
-
-#     def get_all_items(self):
-#         result = self.supabase.from_(self.table_name).select("*").execute()
-#         return result.data
-
-#     def get_item_by_id(self, item_id, id_field="id"):
-#         result = (
-#             self.supabase.from_(self.table_name)
-#             .select("*")
-#             .eq(id_field, item_id)
-#             .execute()
-#         )
-#         return result.data[0] if result.data else None
-
-#     def get_item_by_custom_field(self, field_name, field_value):
-#         result = (
-#             self.supabase.from_(self.table_name)
-#             .select("*")
-#             .eq(field_name, field_value)
-#             .execute()
-#         )
-#         return result.data[0] if result.data else None
-
-#     def update_item(self, item_id, new_data):
-#         result = (
-#             self.supabase.from_(self.table_name)
-#             .update({"id": item_id})
-#             .set(new_data)
-#             .execute()
-#         )
-#         return result.data[0]
-
-#     def delete_item(self, item_id):
-#         result = self.supabase.from_(self.table_name).delete({"id": item_id}).execute()
-#         if result.error:
-#             print(result.error)
-#         return result
-
-
-class SupabaseService(BaseService):
-    def __init__(self, table_name, supabase_key, supabase_url):
-        super().__init__()
-        self.engine = create_engine(
-            f"postgresql://postgres:{supabase_key}@{supabase_url}/postgres"
-        )
-        self.Base = declarative_base()
-        self.Session = sessionmaker(bind=self.engine)
-        self.session = self.Session()
-        self.table_name = table_name
-
-    def add_item(self, item_data):
-        item = self.table_name(**item_data)
-        self.session.add(item)
-        self.session.commit()
-        return item
-
-    def get_all_items(self):
-        table = self.Base.metadata.tables[self.table_name]
-        return self.session.query(table).all()
-
-    def get_item_by_id(self, item_id, id_field="id"):
-        table = self.Base.metadata.tables[self.table_name]
-        return self.session.query(table).filter(table.c.id == item_id).first()
-
-    def update_item(self, item_id, new_data):
-        table = self.Base.metadata.tables[self.table_name]
-        self.session.query(table).filter(table.c.id == item_id).update(new_data)
-        self.session.commit()
-        return self.get_item_by_id(item_id)
-
-    def delete_item(self, item_id):
-        table = self.Base.metadata.tables[self.table_name]
-        self.session.query(table).filter(table.c.id == item_id).delete()
-        self.session.commit()
 
 
 class UsuarioService:
-    def __init__(self, supabase_service: SupabaseService = None):
-        if supabase_service is None:
-            supabase_service = SupabaseService("usuarios")
-        self.supabase_service = supabase_service
+    @classmethod
+    def create_instance(cls):
+        if app_env == "production":
+            return cls(SupabaseService("usuarios"))
+        else:
+            raise ValueError('APP_ENV no valido')
 
-    def get_all_usuarios(self):
-        result = self.supabase_service.get_all_items()
+    def __init__(self, database_service: BaseService):
+        self.database_service = database_service
+
+    def get_all_usuarios(self)-> Usuario:
+        result = self.database_service.get_all_items()
         usuarios = []
         for row in result:
             usuario = Usuario(
@@ -132,7 +32,7 @@ class UsuarioService:
         return usuarios
 
     def get_usuario_by_id(self, id_usuario):
-        result = self.supabase_service.get_item_by_id(id_usuario, "id_usuario")
+        result = self.database_service.get_item_by_id(id_usuario, "id_usuario")
         if result:
             return Usuario(
                 id_usuario=result["id_usuario"],
@@ -145,7 +45,7 @@ class UsuarioService:
         return None
 
     def get_usuario_by_email(self, email):
-        result = self.supabase_service.get_item_by_custom_field("email", email)
+        result = self.database_service.get_item_by_custom_field("email", email)
         if result:
             return Usuario(
                 id_usuario=result["id_usuario"],
@@ -167,7 +67,7 @@ class UsuarioService:
             "rol": rol,
             "fecha_registro": fecha_registro,
         }
-        result = self.supabase_service.add_item(data)
+        result = self.database_service.add_item(data)
         if result:
             return Usuario(
                 id_usuario=result[0]["id_usuario"],
@@ -180,7 +80,7 @@ class UsuarioService:
 
     def update_usuario(self, id_usuario, nombre, email, password, rol):
         data = {"nombre": nombre, "email": email, "password": password, "rol": rol}
-        result = self.supabase_service.update_item(id_usuario, data)
+        result = self.database_service.update_item(id_usuario, data)
         if result:
             return Usuario(
                 id_usuario=id_usuario,
@@ -192,12 +92,15 @@ class UsuarioService:
         return None
 
     def delete_usuario(self, id_usuario):
-        return self.supabase_service.delete_item(id_usuario)
+        return self.database_service.delete_item(id_usuario)
 
 
-class ParqueoEspacioService(SupabaseService):
-    def __init__(self):
-        super().__init__("parqueo_espacios")
+class ParqueoEspacioService():
+    
+    def __init__(self, supabase_service: BaseService = None):
+        if supabase_service is None:
+            supabase_service = SupabaseService("parqueo_espacios")
+        self.supabase_service = supabase_service
 
     def get_parqueo_espacios_by_ubicacion(self, ubicacion):
         result = self.get_item_by_custom_field("ubicacion", ubicacion)
@@ -267,9 +170,12 @@ class ParqueoEspacioService(SupabaseService):
         return self.delete_item(id_espacio)
 
 
-class VehiculoService(SupabaseService):
-    def __init__(self):
-        super().__init__("vehiculos")
+class VehiculoService():
+
+    def __init__(self, supabase_service: BaseService = None):
+        if supabase_service is None:
+            supabase_service = SupabaseService("vehiculos")
+        self.supabase_service = supabase_service  
 
     def get_vehiculo_by_matricula(self, matricula):
         result = self.get_item_by_custom_field("matricula", matricula)
@@ -361,9 +267,12 @@ class VehiculoService(SupabaseService):
         return vehiculos
 
 
-class ReservaService(SupabaseService):
-    def __init__(self):
-        super().__init__("reservas")
+class ReservaService():
+
+    def __init__(self, supabase_service: BaseService = None):
+        if supabase_service is None:
+            supabase_service = SupabaseService("reservas")
+        self.supabase_service = supabase_service
 
     def get_reserva(self, id_reserva):
         result = self.get_item_by_id(id_reserva)

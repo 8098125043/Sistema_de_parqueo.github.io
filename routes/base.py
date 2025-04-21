@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for
+from flask import Blueprint, request, render_template, redirect, url_for, jsonify
 from routes.controllers import create_user, login_user
 from db.services import ParqueoEspacioService, UsuarioService
 from datetime import datetime
@@ -107,3 +107,12 @@ def salida_vehiculo():
 @base.get("/contacto")
 def contacto():
     return render_template("contact.html")
+
+
+@base.get("/test")
+def test():
+    usuario = UsuarioService.create_instance()
+
+    result = usuario.get_all_usuarios()
+    print(result[0],"l;kdfasfasasf")
+    return jsonify({"status": "success", "users": result[0].to_dict()})
