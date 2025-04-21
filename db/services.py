@@ -96,14 +96,19 @@ class UsuarioService:
 
 
 class ParqueoEspacioService():
+
+    @classmethod
+    def create_instance(cls):
+        if app_env == "production":
+            return cls(SupabaseService("parqueo_espacios"))
+        else:
+            raise ValueError('APP_ENV no valido')
     
-    def __init__(self, supabase_service: BaseService = None):
-        if supabase_service is None:
-            supabase_service = SupabaseService("parqueo_espacios")
-        self.supabase_service = supabase_service
+    def __init__(self, database_service: BaseService):
+        self.database_service = database_service
 
     def get_parqueo_espacios_by_ubicacion(self, ubicacion):
-        result = self.get_item_by_custom_field("ubicacion", ubicacion)
+        result = self.database_service.get_item_by_custom_field("ubicacion", ubicacion)
         if result:
             return ParqueoEspacio(
                 id_espacio=result["id_espacio"],
@@ -113,7 +118,7 @@ class ParqueoEspacioService():
         return None
 
     def get_parqueo_espacio(self, id_espacio):
-        result = self.get_item_by_id(id_espacio)
+        result = self.database_service.get_item_by_id(id_espacio)
         if result:
             return ParqueoEspacio(
                 id_espacio=result["id_espacio"],
@@ -123,7 +128,7 @@ class ParqueoEspacioService():
         return None
 
     def get_parqueo_espacios(self):
-        result = self.get_all_items()
+        result = self.database_service.get_all_items()
         parqueo_espacios = []
         for row in result:
             parqueo_espacio = ParqueoEspacio(
@@ -136,7 +141,7 @@ class ParqueoEspacioService():
 
     def create_parqueo_espacio(self, ubicacion, estado="Disponible"):
         data = {"ubicacion": ubicacion, "estado": estado}
-        result = self.add_item(data)
+        result = self.database_service.add_item(data)
 
         if result:
             return ParqueoEspacio(
@@ -147,7 +152,7 @@ class ParqueoEspacioService():
         return None
 
     def update_parqueo_espacio(self, id_espacio, parqueo_espacio=None, estado=None):
-        parqueo_espacio_exist = self.get_parqueo_espacio(id_espacio)
+        parqueo_espacio_exist = self.database_service.get_parqueo_espacio(id_espacio)
 
         if parqueo_espacio_exist is None:
             return None
@@ -167,18 +172,22 @@ class ParqueoEspacioService():
         return None
 
     def delete_parqueo_espacio(self, id_espacio):
-        return self.delete_item(id_espacio)
+        return self.database_service.delete_item(id_espacio)
 
 
 class VehiculoService():
 
-    def __init__(self, supabase_service: BaseService = None):
-        if supabase_service is None:
-            supabase_service = SupabaseService("vehiculos")
-        self.supabase_service = supabase_service  
+    @classmethod
+    def create_instance(cls):
+        if app_env == "production":
+            return cls(SupabaseService("vehiculos"))
+        else:
+            raise ValueError('APP_ENV no valido')
+    def __init__(self, database_service: BaseService):
+        self.database_service = database_service  
 
     def get_vehiculo_by_matricula(self, matricula):
-        result = self.get_item_by_custom_field("matricula", matricula)
+        result = self.database_service.get_item_by_custom_field("matricula", matricula)
         if result:
             return Vehiculo(
                 id_vehiculo=result["id_vehiculo"],
@@ -191,7 +200,7 @@ class VehiculoService():
         return None
 
     def get_vehiculo(self, id_vehiculo):
-        result = self.get_item_by_id(id_vehiculo)
+        result = self.database_service.get_item_by_id(id_vehiculo)
         if result:
             return Vehiculo(
                 id_vehiculo=result["id_vehiculo"],
@@ -211,7 +220,7 @@ class VehiculoService():
             "color": color,
             "id_usuario": id_usuario,
         }
-        result = self.add_item(data)
+        result = self.database_service.add_item(data)
         if result:
             return Vehiculo(
                 id_vehiculo=result[0]["id_vehiculo"],
@@ -224,7 +233,7 @@ class VehiculoService():
         return None
 
     def update_vehiculo(self, id_vehiculo, matricula, marca, modelo, color):
-        vehiculo_exist = self.get_vehiculo(id_vehiculo)
+        vehiculo_exist = self.database_service.get_vehiculo(id_vehiculo)
 
         if vehiculo_exist is None:
             return None
@@ -235,7 +244,7 @@ class VehiculoService():
             "modelo": modelo or vehiculo_exist.modelo,
             "color": color or vehiculo_exist.color,
         }
-        result = self.update_item(id_vehiculo, data)
+        result = self.database_service.update_item(id_vehiculo, data)
         if result:
             return Vehiculo(
                 id_vehiculo=id_vehiculo,
@@ -248,10 +257,10 @@ class VehiculoService():
         return None
 
     def delete_vehiculo(self, id_vehiculo):
-        return self.delete_item(id_vehiculo)
+        return self.database_service.delete_item(id_vehiculo)
 
     def get_vehiculos(self):
-        result = self.get_all_items()
+        result = self.database_service.get_all_items()
         vehiculos = []
         for row in result:
             vehiculos.append(
@@ -269,13 +278,18 @@ class VehiculoService():
 
 class ReservaService():
 
-    def __init__(self, supabase_service: BaseService = None):
-        if supabase_service is None:
-            supabase_service = SupabaseService("reservas")
-        self.supabase_service = supabase_service
+    @classmethod
+    def create_instance(cls):
+        if app_env == "production":
+            return cls(SupabaseService("reservas"))
+        else:
+            raise ValueError('APP_ENV no valido')
+
+    def __init__(self, database_service: BaseService):
+        self.database_service = database_service
 
     def get_reserva(self, id_reserva):
-        result = self.get_item_by_id(id_reserva)
+        result = self.database_service.get_item_by_id(id_reserva)
         if result:
             return Reserva(
                 id_reserva=result["id_reserva"],
@@ -302,7 +316,7 @@ class ReservaService():
             "hora_entrada": hora_entrada,
             "hora_salida": hora_salida,
         }
-        result = self.add_item(data)
+        result = self.database_service.add_item(data)
         if result:
             return Reserva(
                 id_reserva=id_reserva,
@@ -322,7 +336,7 @@ class ReservaService():
         hora_entrada=None,
         hora_salida=None,
     ):
-        reserva_exist = self.get_reserva(id_reserva)
+        reserva_exist = self.database_service.get_reserva(id_reserva)
 
         if reserva_exist is None:
             return None
@@ -334,7 +348,7 @@ class ReservaService():
             "hora_entrada": hora_entrada or reserva_exist.hora_entrada,
             "hora_salida": hora_salida or reserva_exist.hora_salida,
         }
-        result = self.update_item(id_reserva, data)
+        result = self.database_service.update_item(id_reserva, data)
         if result:
             return Reserva(
                 id_reserva=id_reserva,
@@ -347,10 +361,10 @@ class ReservaService():
         return None
 
     def delete_reserva(self, id_reserva):
-        return self.delete_item(id_reserva)
+        return self.database_service.delete_item(id_reserva)
 
     def get_reservas(self):
-        result = self.get_all_items()
+        result = self.database_service.get_all_items()
         reservas = []
         for row in result:
             reserva = Reserva(
