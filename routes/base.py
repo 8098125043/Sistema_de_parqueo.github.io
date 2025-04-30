@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, redirect, url_for
-from routes.controllers import create_user, login_user
+from routes.controllers import create_user, login_user, entrada_vehiculo as process_entrada
 from db.services import ParqueoEspacioService, UsuarioService
 from datetime import datetime
 
@@ -80,15 +80,35 @@ def entrada_vehiculo():
 
     espacio_disponible = None
     for espacio in parqueo_espacios:
-        if espacio.estado == "Disponible":
+        if espacio.estado == "disponible" or espacio.estado == "Disponible":
             espacio_disponible = espacio
             break
 
-    if request.method == "POST":
-        print(request.form.get("vehiclePlate"))
-        print(request.form.get("driverName"))
+    try:
+        if request.method == "POST":
+            if request.is_json:
+                return process_entrada(request.json)
+            espacio = process_entrada(request.form)
+            if espacio:
+                return render_template(
+                    "entrada-vehiculo.html", 
+                    espacio=espacio_disponible, 
+                    hora=hora_actual,
+                    mjs="Entrada registrada con exito"
+                )
+            else:
+                return render_template(
+                    "entrada-vehiculo.html", 
+                    espacio=espacio_disponible, 
+                    hora=hora_actual,
+                    mjs="Espacio no disponible"
+                )
+    except Exception as e:
         return render_template(
-            "entrada-vehiculo.html", espacio=espacio, hora=hora_actual
+            "entrada-vehiculo.html", 
+            espacio=espacio_disponible, 
+            hora=hora_actual,
+            mjs=str(e)
         )
 
     if espacio_disponible:
