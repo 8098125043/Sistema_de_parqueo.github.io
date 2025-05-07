@@ -92,14 +92,15 @@ def entrada_vehiculo(data=None):
         vehiculo = service.get_vehiculo_by_matricula(matricula)
         if not vehiculo:
             vehiculo = service.create_vehiculo(
-                matricula, None, None, None, espacio.id_espacio
+                matricula, None, None, None, 2,
             )
 
         if vehiculo:
             reserva_service = ReservaService()
             reserva_service.create_reserva(
-                vehiculo.id_vehiculo,
+                None,
                 espacio.id_espacio,
+                vehiculo.id_vehiculo,
                 datetime.now().strftime("%Y-%m-%d"),
                 hora_entrada,
                 None,

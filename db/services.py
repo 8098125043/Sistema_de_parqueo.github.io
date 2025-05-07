@@ -334,6 +334,7 @@ class ReservaService(SupabaseService):
                 id_reserva=result["id_reserva"],
                 id_usuario=result["id_usuario"],
                 id_espacio=result["id_espacio"],
+                id_vehiculo=result["id_vehiculo"],
                 fecha_reserva=result["fecha_reserva"],
                 hora_entrada=result["hora_entrada"],
                 hora_salida=result["hora_salida"],
@@ -342,8 +343,9 @@ class ReservaService(SupabaseService):
 
     def create_reserva(
         self,
-        id_reserva,
+        id_usuario=None,
         id_espacio=None,
+        id_vehiculo=None,
         fecha_reserva=None,
         hora_entrada=None,
         hora_salida=None,
@@ -351,6 +353,7 @@ class ReservaService(SupabaseService):
         data = {
             "id_usuario": 2,
             "id_espacio": id_espacio,
+            "id_vehiculo": id_vehiculo,
             "fecha_reserva": fecha_reserva,
             "hora_entrada": hora_entrada,
             "hora_salida": hora_salida,
@@ -358,9 +361,10 @@ class ReservaService(SupabaseService):
         result = self.add_item(data)
         if result:
             return Reserva(
-                id_reserva=id_reserva,
+                id_reserva=result[0]["id_reserva"],
                 id_usuario=2,
                 id_espacio=id_espacio,
+                id_vehiculo=id_vehiculo,
                 fecha_reserva=fecha_reserva,
                 hora_entrada=hora_entrada,
                 hora_salida=hora_salida,
@@ -371,6 +375,7 @@ class ReservaService(SupabaseService):
         self,
         id_reserva,
         id_espacio=None,
+        id_vehiculo=None,
         fecha_reserva=None,
         hora_entrada=None,
         hora_salida=None,
@@ -383,6 +388,7 @@ class ReservaService(SupabaseService):
         data = {
             "id_usuario": reserva_exist.id_usuario,
             "id_espacio": id_espacio or reserva_exist.id_espacio,
+            "id_vehiculo": id_vehiculo or reserva_exist.id_vehiculo,
             "fecha_reserva": fecha_reserva or reserva_exist.fecha_reserva,
             "hora_entrada": hora_entrada or reserva_exist.hora_entrada,
             "hora_salida": hora_salida or reserva_exist.hora_salida,
@@ -393,6 +399,7 @@ class ReservaService(SupabaseService):
                 id_reserva=id_reserva,
                 id_usuario=data["id_usuario"],
                 id_espacio=data["id_espacio"],
+                id_vehiculo=data["id_vehiculo"],
                 fecha_reserva=data["fecha_reserva"],
                 hora_entrada=data["hora_entrada"],
                 hora_salida=data["hora_salida"],
@@ -410,6 +417,7 @@ class ReservaService(SupabaseService):
                 id_reserva=row["id_reserva"],
                 id_usuario=row["id_usuario"],
                 id_espacio=row["id_espacio"],
+                id_vehiculo=row["id_vehiculo"],
                 fecha_reserva=row["fecha_reserva"],
                 hora_entrada=row["hora_entrada"],
                 hora_salida=row["hora_salida"],

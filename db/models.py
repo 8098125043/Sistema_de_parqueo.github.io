@@ -51,13 +51,15 @@ class Reserva:
         id_reserva=None,
         id_usuario=None,
         id_espacio=None,
+        id_vehiculo=None,
         fecha_reserva=None,
         hora_entrada=None,
         hora_salida=None,
     ):
         self.id_reserva = id_reserva
         self.id_usuario = id_usuario
-        self.id_espacio = id_espacio
+        self.id_espacio = id_espacio,
+        self.id_vehiculo = id_vehiculo
         self.fecha_reserva = fecha_reserva
         self.hora_entrada = hora_entrada
         self.hora_salida = hora_salida
@@ -67,6 +69,7 @@ class Reserva:
             "id_reserva": self.id_reserva,
             "id_usuario": self.id_usuario,
             "id_espacio": self.id_espacio,
+            "id_vehiculo": self.id_vehiculo,
             "fecha_reserva": self.fecha_reserva,
             "hora_entrada": self.hora_entrada,
             "hora_salida": self.hora_salida,

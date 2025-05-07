@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from routes.controllers import create_user, login_user, entrada_vehiculo as process_entrada
-from db.services import ParqueoEspacioService, UsuarioService
+from db.services import ParqueoEspacioService, UsuarioService, ReservaService, VehiculoService
 from datetime import datetime
 
 base = Blueprint("base", __name__)
@@ -119,7 +119,19 @@ def entrada_vehiculo():
 
 @base.get("/salida-vehiculo")
 def salida_vehiculo():
-    return render_template("salida_vehiculo.html")
+    reserva_service = ReservaService()
+    vehiculo_service = VehiculoService()
+    reservas = reserva_service.get_reservas()
+    reservas_sin_salida = [reserva for reserva in reservas if reserva.hora_salida is None]
+    reservas_distintas = []
+    matriculas_registradas = set()
+    for reserva in reservas_sin_salida:
+        vehiculo = vehiculo_service.get_vehiculo(reserva.id_vehiculo)
+        if vehiculo and vehiculo.matricula not in matriculas_registradas:
+            reservas_distintas.append([reserva.id_reserva, vehiculo.matricula])
+            matriculas_registradas.add(vehiculo.matricula)
+    print(reservas_distintas)
+    return render_template("salida_vehiculo.html" , reservas=reservas_distintas)
 
 
 @base.get("/contacto")
