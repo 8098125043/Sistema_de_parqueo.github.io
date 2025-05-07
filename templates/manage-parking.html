@@ -46,7 +46,11 @@
                     {% for espacio in espacios %}
                     <tr>
                         <td>{{ espacio.id_espacio }}</td>
+                        {% if espacio.estado == 'Disponible' or espacio.estado == 'disponible' %}
                         <td><span class="badge bg-success">{{ espacio.estado }}</span></td>
+                        {% else %}
+                        <td><span class="badge bg-danger">{{ espacio.estado }}</span></td>
+                        {% endif %}
                         <td>
                             <!-- <button class="btn btn-sm btn-secondary" onclick="asignarEntrada(1)">Registrar
                                 Entrada</button> -->
@@ -131,7 +135,7 @@
         </div>
     </div>
 
-    <footer class="bg-dark text-white text-center py-3 fixed-bottom">
+    <footer class="bg-dark text-white text-center py-3 bottom-0">
         <p>&copy; 2024 Sistema de Parqueo PARKINSLOT. Todos los derechos reservados.</p>
     </footer>
 

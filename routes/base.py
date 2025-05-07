@@ -86,8 +86,6 @@ def entrada_vehiculo():
 
     try:
         if request.method == "POST":
-            if request.is_json:
-                return process_entrada(request.json)
             espacio = process_entrada(request.form)
             if espacio:
                 return render_template(

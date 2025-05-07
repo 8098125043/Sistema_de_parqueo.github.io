@@ -55,13 +55,14 @@ class SupabaseService(BaseService):
         )
         return result.data[0] if result.data else None
 
-    def update_item(self, item_id, new_data):
+    def update_item(self, item_id, new_data, id_field="id"):
         result = (
             self.supabase.from_(self.table_name)
-            .update({"id": item_id})
-            .set(new_data)
+            .update(new_data)
+            .eq(id_field, item_id)
             .execute()
         )
+        print(result)
         return result.data[0]
 
     def delete_item(self, item_id):
@@ -171,7 +172,7 @@ class ParqueoEspacioService(SupabaseService):
         return None
 
     def get_parqueo_espacio(self, id_espacio):
-        result = self.get_item_by_id(id_espacio)
+        result = self.get_item_by_custom_field("id_espacio", id_espacio)
         if result:
             return ParqueoEspacio(
                 id_espacio=result["id_espacio"],
@@ -205,8 +206,8 @@ class ParqueoEspacioService(SupabaseService):
         return None
 
     def update_parqueo_espacio(self, id_espacio, parqueo_espacio=None, estado=None):
+        print(id_espacio, parqueo_espacio, estado)
         parqueo_espacio_exist = self.get_parqueo_espacio(id_espacio)
-
         if parqueo_espacio_exist is None:
             return None
 
@@ -219,7 +220,7 @@ class ParqueoEspacioService(SupabaseService):
             "ubicacion": parqueo_espacio_exist.ubicacion,
             "estado": parqueo_espacio_exist.estado,
         }
-        result = self.update_item(id_espacio, data)
+        result = self.update_item(id_espacio, data, id_field="id_espacio")
         if result:
             return parqueo_espacio_exist
         return None
@@ -348,7 +349,7 @@ class ReservaService(SupabaseService):
         hora_salida=None,
     ):
         data = {
-            "id_usuario": 27,
+            "id_usuario": 2,
             "id_espacio": id_espacio,
             "fecha_reserva": fecha_reserva,
             "hora_entrada": hora_entrada,
@@ -358,7 +359,7 @@ class ReservaService(SupabaseService):
         if result:
             return Reserva(
                 id_reserva=id_reserva,
-                id_usuario=27,
+                id_usuario=2,
                 id_espacio=id_espacio,
                 fecha_reserva=fecha_reserva,
                 hora_entrada=hora_entrada,
@@ -386,7 +387,7 @@ class ReservaService(SupabaseService):
             "hora_entrada": hora_entrada or reserva_exist.hora_entrada,
             "hora_salida": hora_salida or reserva_exist.hora_salida,
         }
-        result = self.update_item(id_reserva, data)
+        result = self.update_item(id_reserva, data, "id_reserva")
         if result:
             return Reserva(
                 id_reserva=id_reserva,

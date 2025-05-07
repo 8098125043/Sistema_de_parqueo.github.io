@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from datetime import datetime
 from db.services import (
     UsuarioService,
     ParqueoEspacioService,
@@ -84,20 +85,27 @@ def entrada_vehiculo(data=None):
         ubicacion = request.json.get("parkingSpace")
 
     espacio_service = ParqueoEspacioService()
-    espacio = espacio_service.get_espacio_by_ubicacion(ubicacion)
+    espacio = espacio_service.get_parqueo_espacios_by_ubicacion(ubicacion)
 
     if espacio:
         service = VehiculoService()
-        result = service.create_vehiculo(
-            matricula, None, None, None, espacio.id_espacio
-        )
+        vehiculo = service.get_vehiculo_by_matricula(matricula)
+        if not vehiculo:
+            vehiculo = service.create_vehiculo(
+                matricula, None, None, None, espacio.id_espacio
+            )
 
-        if result:
+        if vehiculo:
             reserva_service = ReservaService()
             reserva_service.create_reserva(
-                result.id_vehiculo, None, espacio.id_espacio, hora_entrada, None
+                vehiculo.id_vehiculo,
+                espacio.id_espacio,
+                datetime.now().strftime("%Y-%m-%d"),
+                hora_entrada,
+                None,
             )
-            return result
+            espacio_service.update_parqueo_espacio(espacio.id_espacio, None, "ocupado")
+            return vehiculo
     return None
 
 
