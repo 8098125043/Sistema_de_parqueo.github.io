@@ -247,7 +247,7 @@ class VehiculoService(SupabaseService):
         return None
 
     def get_vehiculo(self, id_vehiculo):
-        result = self.get_item_by_id(id_vehiculo)
+        result = self.get_item_by_custom_field("id_vehiculo", id_vehiculo)
         if result:
             return Vehiculo(
                 id_vehiculo=result["id_vehiculo"],
@@ -416,7 +416,7 @@ class ReservaService(SupabaseService):
             reserva = Reserva(
                 id_reserva=row["id_reserva"],
                 id_usuario=row["id_usuario"],
-                id_espacio=row["id_espacio"],
+                id_espacio=int(row["id_espacio"]),
                 id_vehiculo=row["id_vehiculo"],
                 fecha_reserva=row["fecha_reserva"],
                 hora_entrada=row["hora_entrada"],

@@ -121,14 +121,16 @@ def entrada_vehiculo():
 def salida_vehiculo():
     reserva_service = ReservaService()
     vehiculo_service = VehiculoService()
+    parqueo_service = ParqueoEspacioService()
     reservas = reserva_service.get_reservas()
     reservas_sin_salida = [reserva for reserva in reservas if reserva.hora_salida is None]
     reservas_distintas = []
     matriculas_registradas = set()
     for reserva in reservas_sin_salida:
         vehiculo = vehiculo_service.get_vehiculo(reserva.id_vehiculo)
+        parqueo = parqueo_service.get_parqueo_espacio(reserva.id_espacio[0])
         if vehiculo and vehiculo.matricula not in matriculas_registradas:
-            reservas_distintas.append([reserva.id_reserva, vehiculo.matricula])
+            reservas_distintas.append([reserva.id_reserva, vehiculo.matricula, parqueo.ubicacion])
             matriculas_registradas.add(vehiculo.matricula)
     print(reservas_distintas)
     return render_template("salida_vehiculo.html" , reservas=reservas_distintas)
