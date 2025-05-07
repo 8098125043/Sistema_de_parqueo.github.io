@@ -33,6 +33,17 @@
         <h2 class="text-center">Registro de Salida</h2>
         <div class="card mt-4">
             <div class="card-body">
+                {%if not reservas%}
+                <script>
+                    alert("No hay Espacios Ocupados");
+                </script>
+                {%endif%}
+
+                {%if mjs%}
+                <script>
+                    alert("{{ mjs }}");
+                </script>
+                {%endif%}
                 <form class="row g-3" action="/salida-vehiculo" method="POST">
                     <div class="col-md-6">
                         <label for="vehiclePlate" class="form-label">Número de Placa</label>
@@ -44,7 +55,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="parkingSpace" class="form-label">Espacio de Parqueo</label>
-                        <input type="text" class="form-control" id="parkingSpace" placeholder="Ej: Espacio 5" disabled>
+                        <select id="parkingSpace" name="parkingSpace" class="form-select">
+                            {% for reserva in reservas %}
+                            <option value="{{ reserva[2] }}">{{ reserva[2] }}</option>
+                            {% endfor %}
+                            {% if not reservas %} <option value="No hay Espacios Ocupados">No hay Espacios Ocupados
+                            </option> {% endif %}
+                        </select>
+                        <!-- <input type="text" class="form-control" id="parkingSpace" placeholder="Ej: Espacio 5" disabled> -->
                     </div>
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary">Registrar Salida</button>

@@ -132,7 +132,6 @@ def salida_vehiculo():
         if vehiculo and vehiculo.matricula not in matriculas_registradas:
             reservas_distintas.append([reserva.id_reserva, vehiculo.matricula, parqueo.ubicacion])
             matriculas_registradas.add(vehiculo.matricula)
-    print(reservas_distintas)
     return render_template("salida_vehiculo.html" , reservas=reservas_distintas)
 
 
